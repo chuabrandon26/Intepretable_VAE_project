@@ -47,7 +47,7 @@ Three complementary approaches were explored:
 
 ### 2. Stochastic Weight Averaging (SWA)
 - Aggregates weights along the SGD trajectory
-- Improves robustness without explicitly training large ensembles
+- Improves robustness without training large ensembles
 - Applied separately to control and stimulated models
 
 ### 3. Bayesian VEGA
