@@ -1,0 +1,338 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 752" width="1000" height="752" role="img" aria-labelledby="t d">
+<title id="t">Visual abstract: An interpretable VAE for TF rewiring</title>
+<desc id="d">VEGA variational autoencoders with transcription-factor latent nodes and a CollecTRI-masked decoder are trained separately on IFN-beta stimulated and control PBMCs (16,893 cells). Decoder weights reveal TF rewiring such as STAT1 to CCL8 (+0.104), STAT2 to IFIT2 (+0.074) and IRF1 to RSAD2 (+0.062), with uncertainty from ensembles, stochastic weight averaging and Bayesian layers.</desc>
+<style>
+  text { font-family: 'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', sans-serif; fill: #e6edf3; }
+  .bgcard { fill: #151b23; stroke: #2d3640; }
+  .panel { fill: #0d1117; stroke: #2d3640; stroke-width: 1; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.6px; fill: #9aa7b4; }
+  .title { font-size: 26px; font-weight: 700; letter-spacing: -0.3px; }
+  .sub { font-size: 14px; fill: #9aa7b4; }
+  .h2 { font-size: 16px; font-weight: 700; }
+  .body { font-size: 12.5px; }
+  .small { font-size: 11px; fill: #9aa7b4; }
+  .lab { font-size: 12px; font-weight: 700; }
+  .num { font-size: 23px; font-weight: 700; }
+  .q { font-size: 12.5px; font-weight: 700; }
+  .take { font-size: 15px; }
+  .em { font-weight: 700; }
+  .step-role { font-size: 13px; font-weight: 700; }
+  .step-tool { font-size: 11px; }
+  .step-n { font-size: 10px; font-weight: 700; fill: #9aa7b4; }
+  .chiptext { font-size: 11.5px; font-weight: 600; }
+  .skill { fill: #0d1117; stroke: #2d3640; stroke-width: 1.2; }
+  .rule { stroke: #2d3640; stroke-width: 1; fill: none; }
+  .qbox { fill: #1c2033; }
+  .qmark { fill: #9085e9; }
+  .qmark-t { font-size: 13px; font-weight: 700; fill: #0d1117; }
+  .chev { fill: none; stroke: #9aa7b4; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .chip { fill: #0d1117; stroke: #2d3640; stroke-width: 1.2; animation: glow 8.4s linear infinite; }
+  .track { stroke: #2d3640; stroke-width: 2; stroke-linecap: round; }
+  .packet { fill: #34b98b; animation: travel 8.4s linear infinite; }
+  .tile { stroke-width: 1.5; }
+  .tile.up { fill: #e66767; fill-opacity: .14; stroke: #e66767; }
+  .tile.down { fill: #3987e5; fill-opacity: .14; stroke: #3987e5; }
+  .tile.metric { fill: #34b98b; fill-opacity: .12; stroke: #34b98b; }
+  .tile.note { fill: #9085e9; fill-opacity: .10; stroke: #9085e9; }
+  .tval { font-size: 15px; font-weight: 700; }
+  .tsub { font-size: 10px; fill: #9aa7b4; }
+  .tri-up { fill: #e66767; transform-box: fill-box; transform-origin: center; animation: bobUp 2.6s ease-in-out infinite; }
+  .tri-down { fill: #3987e5; transform-box: fill-box; transform-origin: center; animation: bobDown 2.6s ease-in-out infinite; }
+  .check { fill: none; stroke: #34b98b; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+  .statbox { fill: #1f2731; }
+  /* motif classes */
+  .m-lab { font-size: 11px; fill: #9aa7b4; }
+  .m-lab.bold { font-weight: 700; fill: #e6edf3; }
+  .m-lab.small { font-size: 9.5px; }
+  .m-lab.inv { fill: #0d1117; font-weight: 700; }
+  .m-strand { fill: none; stroke-width: 2.6; stroke-linecap: round; }
+  .m-strand.a { stroke: #9085e9; }
+  .m-strand.b { stroke: #34b98b; }
+  .m-rung { stroke: #2d3640; stroke-width: 2; }
+  .m-rung.hit { stroke: #d55181; stroke-width: 3; }
+  .m-hitdot, .m-ring, .m-dot.hom, .m-cell.hom { transform-box: fill-box; transform-origin: center; }
+  .m-hitdot { fill: #d55181; animation: pulse 3s ease-in-out infinite; }
+  .m-dot { fill-opacity: .85; }
+  .cx { fill: #9085e9; } .acc { fill: #34b98b; } .cb { fill: #c98500; } .hom { fill: #d55181; }
+  .ink { fill: #e6edf3; }
+  .m-peak { fill-opacity: .7; stroke: none; }
+  .m-base { stroke: #2d3640; stroke-width: 1.2; }
+  .m-gene { stroke: #9aa7b4; stroke-width: 1.4; }
+  .m-exon { fill: #9aa7b4; }
+  .m-tissue { fill: #1f2731; stroke: #9aa7b4; stroke-width: 1.2; }
+  .m-tissue.fillonly { stroke: none; }
+  .m-tissue.outline { fill: none; stroke-width: 1.6; }
+  .m-ring { fill: none; stroke: #e6edf3; stroke-width: 2; stroke-dasharray: 3 2; animation: pulse 3.2s ease-in-out infinite; }
+  .m-cell { stroke: #0d1117; stroke-width: 1.2; }
+  .m-radius { fill: #34b98b; fill-opacity: .08; stroke: #34b98b; stroke-width: 1.6; stroke-dasharray: 4 3; }
+  .m-center { fill: #e6edf3; }
+  .m-cellf { stroke: none; }
+  .m-op { font-size: 18px; font-weight: 700; fill: #9aa7b4; }
+  .m-edge { stroke: #2d3640; stroke-width: .8; }
+  .m-edge.strong { stroke: #9aa7b4; stroke-width: 1.4; }
+  .m-node { fill: #0d1117; stroke: #9085e9; stroke-width: 2; }
+  .m-node.in { stroke: #9aa7b4; }
+  .m-node.z { fill: #34b98b; stroke: #34b98b; }
+  .m-base-t { font-family: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace; font-size: 15px; font-weight: 700; }
+  .m-base-t.acc { fill: #34b98b; } .m-base-t.cx { fill: #9085e9; } .m-base-t.cb { fill: #c98500; } .m-base-t.hom { fill: #d55181; }
+  .m-window { fill: #34b98b; fill-opacity: .10; stroke: #34b98b; stroke-width: 2; animation: scan 4s ease-in-out infinite; }
+  .m-bar { fill: #9085e9; fill-opacity: .75; }
+  .m-arrow { stroke: #9aa7b4; stroke-width: 1.4; fill: none; }
+  .m-table { fill: #0d1117; stroke: #9aa7b4; stroke-width: 1.2; }
+  .m-thead { fill: #9085e9; }
+  .m-row { stroke: #2d3640; stroke-width: 1.4; }
+  .m-cyl { fill: #1f2731; stroke: #34b98b; stroke-width: 1.6; }
+  .m-cyl.top { fill: #0d1117; }
+  .m-bond { stroke: #9aa7b4; stroke-width: 3; stroke-linecap: round; }
+  .m-atom { fill: #9aa7b4; stroke: #0d1117; stroke-width: 1.4; }
+  .m-atom.pep { animation: drift 4s ease-in-out infinite; }
+  .m-head { fill: #c98500; }
+  .m-tail { fill: none; stroke: #2d3640; stroke-width: 1.4; }
+  .m-stick { stroke: #9aa7b4; stroke-width: 2; }
+  .m-stick.ghost { stroke: #2d3640; stroke-dasharray: 3 2; }
+  .m-stick.hit { stroke: #d55181; stroke-width: 3; }
+  .m-ecg { fill: none; stroke: #d55181; stroke-width: 2.2; stroke-linejoin: round; stroke-dasharray: 900; animation: ecg 3.4s linear infinite; }
+  .m-gauge { fill: none; stroke-width: 9; }
+  .m-gauge.acc { stroke: #34b98b; } .m-gauge.cb { stroke: #c98500; } .m-gauge.hom { stroke: #d55181; }
+  .m-needle { stroke: #e6edf3; stroke-width: 2.6; stroke-linecap: round; }
+  @keyframes pulse { 0%, 100% { opacity: .5; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.15); } }
+  @keyframes bobUp { 0%, 100% { transform: translateY(1.5px); } 50% { transform: translateY(-1.5px); } }
+  @keyframes bobDown { 0%, 100% { transform: translateY(-1.5px); } 50% { transform: translateY(1.5px); } }
+  @keyframes travel { 0% { transform: translateX(0); opacity: 0; } 3% { opacity: 1; } 97% { opacity: 1; } 100% { transform: translateX(776.6px); opacity: 0; } }
+  @keyframes glow { 0%, 14.3%, 100% { stroke: #2d3640; stroke-width: 1.2; } 3%, 8.9% { stroke: #34b98b; stroke-width: 2.2; } }
+  @keyframes scan { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+  @keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+  @keyframes ecg { 0% { stroke-dashoffset: 900; } 100% { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+<rect x="0.5" y="0.5" width="999" height="751" rx="18" class="bgcard"/>
+<text x="36.0" y="44.0" class="eyebrow">VISUAL ABSTRACT  ·  INTERPRETABLE DEEP LEARNING  ·  VEGA VAE  ·  INTERFERON SIGNALING</text>
+<text x="36.0" y="79.0" class="title">An interpretable VAE for TF rewiring</text>
+<text x="36.0" y="106.0" class="sub">VEGA models of IFN-β stimulated vs control PBMCs, with a CollecTRI-masked decoder and three uncertainty methods</text>
+<rect x="36" y="128" width="296" height="368" rx="12" class="panel"/><text x="52.0" y="154.0" class="eyebrow">QUESTION</text><text x="52.0" y="176.0" class="h2">How does IFN-β rewire STATs?</text>
+<line x1="68.0" y1="213.0" x2="145.3" y2="228.0" class="m-edge"/>
+<line x1="68.0" y1="213.0" x2="145.3" y2="243.0" class="m-edge"/>
+<line x1="68.0" y1="213.0" x2="145.3" y2="258.0" class="m-edge"/>
+<line x1="68.0" y1="213.0" x2="145.3" y2="273.0" class="m-edge"/>
+<line x1="68.0" y1="213.0" x2="145.3" y2="288.0" class="m-edge"/>
+<line x1="68.0" y1="228.0" x2="145.3" y2="228.0" class="m-edge"/>
+<line x1="68.0" y1="228.0" x2="145.3" y2="243.0" class="m-edge"/>
+<line x1="68.0" y1="228.0" x2="145.3" y2="258.0" class="m-edge"/>
+<line x1="68.0" y1="228.0" x2="145.3" y2="273.0" class="m-edge"/>
+<line x1="68.0" y1="228.0" x2="145.3" y2="288.0" class="m-edge"/>
+<line x1="68.0" y1="243.0" x2="145.3" y2="228.0" class="m-edge"/>
+<line x1="68.0" y1="243.0" x2="145.3" y2="243.0" class="m-edge"/>
+<line x1="68.0" y1="243.0" x2="145.3" y2="258.0" class="m-edge"/>
+<line x1="68.0" y1="243.0" x2="145.3" y2="273.0" class="m-edge"/>
+<line x1="68.0" y1="243.0" x2="145.3" y2="288.0" class="m-edge"/>
+<line x1="68.0" y1="258.0" x2="145.3" y2="228.0" class="m-edge"/>
+<line x1="68.0" y1="258.0" x2="145.3" y2="243.0" class="m-edge"/>
+<line x1="68.0" y1="258.0" x2="145.3" y2="258.0" class="m-edge"/>
+<line x1="68.0" y1="258.0" x2="145.3" y2="273.0" class="m-edge"/>
+<line x1="68.0" y1="258.0" x2="145.3" y2="288.0" class="m-edge"/>
+<line x1="68.0" y1="273.0" x2="145.3" y2="228.0" class="m-edge"/>
+<line x1="68.0" y1="273.0" x2="145.3" y2="243.0" class="m-edge"/>
+<line x1="68.0" y1="273.0" x2="145.3" y2="258.0" class="m-edge"/>
+<line x1="68.0" y1="273.0" x2="145.3" y2="273.0" class="m-edge"/>
+<line x1="68.0" y1="273.0" x2="145.3" y2="288.0" class="m-edge"/>
+<line x1="68.0" y1="288.0" x2="145.3" y2="228.0" class="m-edge"/>
+<line x1="68.0" y1="288.0" x2="145.3" y2="243.0" class="m-edge"/>
+<line x1="68.0" y1="288.0" x2="145.3" y2="258.0" class="m-edge"/>
+<line x1="68.0" y1="288.0" x2="145.3" y2="273.0" class="m-edge"/>
+<line x1="68.0" y1="288.0" x2="145.3" y2="288.0" class="m-edge"/>
+<line x1="68.0" y1="303.0" x2="145.3" y2="228.0" class="m-edge"/>
+<line x1="68.0" y1="303.0" x2="145.3" y2="243.0" class="m-edge"/>
+<line x1="68.0" y1="303.0" x2="145.3" y2="258.0" class="m-edge"/>
+<line x1="68.0" y1="303.0" x2="145.3" y2="273.0" class="m-edge"/>
+<line x1="68.0" y1="303.0" x2="145.3" y2="288.0" class="m-edge"/>
+<line x1="145.3" y1="228.0" x2="222.7" y2="235.5" class="m-edge"/>
+<line x1="145.3" y1="228.0" x2="222.7" y2="250.5" class="m-edge"/>
+<line x1="145.3" y1="228.0" x2="222.7" y2="265.5" class="m-edge"/>
+<line x1="145.3" y1="228.0" x2="222.7" y2="280.5" class="m-edge"/>
+<line x1="145.3" y1="243.0" x2="222.7" y2="235.5" class="m-edge"/>
+<line x1="145.3" y1="243.0" x2="222.7" y2="250.5" class="m-edge"/>
+<line x1="145.3" y1="243.0" x2="222.7" y2="265.5" class="m-edge"/>
+<line x1="145.3" y1="243.0" x2="222.7" y2="280.5" class="m-edge"/>
+<line x1="145.3" y1="258.0" x2="222.7" y2="235.5" class="m-edge"/>
+<line x1="145.3" y1="258.0" x2="222.7" y2="250.5" class="m-edge"/>
+<line x1="145.3" y1="258.0" x2="222.7" y2="265.5" class="m-edge"/>
+<line x1="145.3" y1="258.0" x2="222.7" y2="280.5" class="m-edge"/>
+<line x1="145.3" y1="273.0" x2="222.7" y2="235.5" class="m-edge"/>
+<line x1="145.3" y1="273.0" x2="222.7" y2="250.5" class="m-edge"/>
+<line x1="145.3" y1="273.0" x2="222.7" y2="265.5" class="m-edge"/>
+<line x1="145.3" y1="273.0" x2="222.7" y2="280.5" class="m-edge"/>
+<line x1="145.3" y1="288.0" x2="222.7" y2="235.5" class="m-edge"/>
+<line x1="145.3" y1="288.0" x2="222.7" y2="250.5" class="m-edge"/>
+<line x1="145.3" y1="288.0" x2="222.7" y2="265.5" class="m-edge"/>
+<line x1="145.3" y1="288.0" x2="222.7" y2="280.5" class="m-edge"/>
+<line x1="222.7" y1="235.5" x2="300.0" y2="213.0" class="m-edge"/>
+<line x1="222.7" y1="235.5" x2="300.0" y2="228.0" class="m-edge"/>
+<line x1="222.7" y1="235.5" x2="300.0" y2="243.0" class="m-edge"/>
+<line x1="222.7" y1="235.5" x2="300.0" y2="258.0" class="m-edge"/>
+<line x1="222.7" y1="235.5" x2="300.0" y2="273.0" class="m-edge"/>
+<line x1="222.7" y1="235.5" x2="300.0" y2="288.0" class="m-edge"/>
+<line x1="222.7" y1="235.5" x2="300.0" y2="303.0" class="m-edge"/>
+<line x1="222.7" y1="250.5" x2="300.0" y2="213.0" class="m-edge"/>
+<line x1="222.7" y1="250.5" x2="300.0" y2="228.0" class="m-edge"/>
+<line x1="222.7" y1="250.5" x2="300.0" y2="243.0" class="m-edge"/>
+<line x1="222.7" y1="250.5" x2="300.0" y2="258.0" class="m-edge"/>
+<line x1="222.7" y1="250.5" x2="300.0" y2="273.0" class="m-edge"/>
+<line x1="222.7" y1="250.5" x2="300.0" y2="288.0" class="m-edge"/>
+<line x1="222.7" y1="250.5" x2="300.0" y2="303.0" class="m-edge"/>
+<line x1="222.7" y1="265.5" x2="300.0" y2="213.0" class="m-edge"/>
+<line x1="222.7" y1="265.5" x2="300.0" y2="228.0" class="m-edge"/>
+<line x1="222.7" y1="265.5" x2="300.0" y2="243.0" class="m-edge"/>
+<line x1="222.7" y1="265.5" x2="300.0" y2="258.0" class="m-edge"/>
+<line x1="222.7" y1="265.5" x2="300.0" y2="273.0" class="m-edge"/>
+<line x1="222.7" y1="265.5" x2="300.0" y2="288.0" class="m-edge"/>
+<line x1="222.7" y1="265.5" x2="300.0" y2="303.0" class="m-edge"/>
+<line x1="222.7" y1="280.5" x2="300.0" y2="213.0" class="m-edge"/>
+<line x1="222.7" y1="280.5" x2="300.0" y2="228.0" class="m-edge"/>
+<line x1="222.7" y1="280.5" x2="300.0" y2="243.0" class="m-edge"/>
+<line x1="222.7" y1="280.5" x2="300.0" y2="258.0" class="m-edge"/>
+<line x1="222.7" y1="280.5" x2="300.0" y2="273.0" class="m-edge"/>
+<line x1="222.7" y1="280.5" x2="300.0" y2="288.0" class="m-edge"/>
+<line x1="222.7" y1="280.5" x2="300.0" y2="303.0" class="m-edge"/>
+<circle cx="68.0" cy="213.0" r="4.6" class="m-node in"/>
+<circle cx="68.0" cy="228.0" r="4.6" class="m-node in"/>
+<circle cx="68.0" cy="243.0" r="4.6" class="m-node in"/>
+<circle cx="68.0" cy="258.0" r="4.6" class="m-node in"/>
+<circle cx="68.0" cy="273.0" r="4.6" class="m-node in"/>
+<circle cx="68.0" cy="288.0" r="4.6" class="m-node in"/>
+<circle cx="68.0" cy="303.0" r="4.6" class="m-node in"/>
+<circle cx="145.3" cy="228.0" r="4.6" class="m-node"/>
+<circle cx="145.3" cy="243.0" r="4.6" class="m-node"/>
+<circle cx="145.3" cy="258.0" r="4.6" class="m-node"/>
+<circle cx="145.3" cy="273.0" r="4.6" class="m-node"/>
+<circle cx="145.3" cy="288.0" r="4.6" class="m-node"/>
+<circle cx="222.7" cy="235.5" r="6" class="m-node z"/>
+<circle cx="222.7" cy="250.5" r="6" class="m-node z"/>
+<circle cx="222.7" cy="265.5" r="6" class="m-node z"/>
+<circle cx="222.7" cy="280.5" r="6" class="m-node z"/>
+<circle cx="300.0" cy="213.0" r="4.6" class="m-node"/>
+<circle cx="300.0" cy="228.0" r="4.6" class="m-node"/>
+<circle cx="300.0" cy="243.0" r="4.6" class="m-node"/>
+<circle cx="300.0" cy="258.0" r="4.6" class="m-node"/>
+<circle cx="300.0" cy="273.0" r="4.6" class="m-node"/>
+<circle cx="300.0" cy="288.0" r="4.6" class="m-node"/>
+<circle cx="300.0" cy="303.0" r="4.6" class="m-node"/>
+<text x="68.0" y="326.0" class="m-lab" text-anchor="middle">genes</text>
+<text x="222.7" y="326.0" class="m-lab" text-anchor="middle">TF nodes</text>
+<text x="300.0" y="326.0" class="m-lab" text-anchor="middle">genes</text>
+<text x="184.0" y="342.0" class="small" text-anchor="middle">Latent nodes are TFs; the decoder follows CollecTRI</text>
+<text x="52.0" y="368.0" class="body">Interferon-β reshapes which genes the</text>
+<text x="52.0" y="384.5" class="body">STAT and IRF factors control. VEGA ties</text>
+<text x="52.0" y="401.0" class="body">each latent node to one transcription</text>
+<text x="52.0" y="417.5" class="body">factor, so decoder weights read as</text>
+<text x="52.0" y="434.0" class="body">TF to gene regulatory strength.</text>
+<rect x="48" y="446" width="272" height="38" rx="8" class="qbox"/>
+<circle cx="68" cy="465" r="10" class="qmark"/>
+<text x="68.0" y="470.0" class="qmark-t" text-anchor="middle">?</text>
+<text x="86.0" y="461.0" class="q">Which TF to gene links strengthen</text>
+<text x="86.0" y="477.0" class="q">after IFN-β, and how certain are they?</text>
+<rect x="352" y="128" width="296" height="368" rx="12" class="panel"/><text x="368.0" y="154.0" class="eyebrow">DATA AND DESIGN</text><text x="368.0" y="176.0" class="h2">PBMCs, stimulated vs control</text>
+<rect x="368" y="192" width="128" height="66" rx="8" class="statbox"/>
+<text x="380.0" y="222.0" class="num">13,515</text>
+<text x="380.0" y="239.0" class="small">training cells</text>
+<rect x="504" y="192" width="128" height="66" rx="8" class="statbox"/>
+<text x="516.0" y="222.0" class="num">3,378</text>
+<text x="516.0" y="239.0" class="small">validation cells</text>
+<rect x="368" y="266" width="128" height="66" rx="8" class="statbox"/>
+<text x="380.0" y="296.0" class="num">2</text>
+<text x="380.0" y="313.0" class="small">conditions, each with</text>
+<text x="380.0" y="326.0" class="small">its own models</text>
+<rect x="504" y="266" width="128" height="66" rx="8" class="statbox"/>
+<text x="516.0" y="296.0" class="num">3</text>
+<text x="516.0" y="313.0" class="small">uncertainty methods</text>
+<text x="368.0" y="362.0" class="body">IFN-β stimulated and control PBMCs</text>
+<text x="368.0" y="378.5" class="body">from lupus patients are modeled</text>
+<text x="368.0" y="395.0" class="body">separately, and decoder weights are</text>
+<text x="368.0" y="411.5" class="body">then compared across conditions.</text>
+<line x1="368" y1="446" x2="632" y2="446" class="rule"/>
+<text x="368.0" y="466.0" class="small">Prior: CollecTRI regulons via decoupler</text>
+<text x="368.0" y="481.0" class="small">Masks: activator, inhibitor and merged</text>
+<rect x="668" y="128" width="296" height="368" rx="12" class="panel"/><text x="684.0" y="154.0" class="eyebrow">FINDINGS</text><text x="684.0" y="176.0" class="h2">Strongest rewired links</text>
+<text x="684.0" y="219.0" class="lab">STAT1 → CCL8</text>
+<rect x="848" y="192" width="100" height="46" rx="8" class="tile metric"/>
+<text x="898.0" y="216.0" class="tval" text-anchor="middle">+0.104</text>
+<text x="898.0" y="230.0" class="tsub" text-anchor="middle">weight shift</text>
+<text x="684.0" y="271.0" class="lab">STAT2 → IFIT2</text>
+<rect x="848" y="244" width="100" height="46" rx="8" class="tile metric"/>
+<text x="898.0" y="268.0" class="tval" text-anchor="middle">+0.074</text>
+<text x="898.0" y="282.0" class="tsub" text-anchor="middle">weight shift</text>
+<text x="684.0" y="323.0" class="lab">IRF1 → RSAD2</text>
+<rect x="848" y="296" width="100" height="46" rx="8" class="tile metric"/>
+<text x="898.0" y="320.0" class="tval" text-anchor="middle">+0.062</text>
+<text x="898.0" y="334.0" class="tsub" text-anchor="middle">activator mask</text>
+<text x="684.0" y="375.0" class="lab">IRF1 → CXCL10</text>
+<rect x="848" y="348" width="100" height="46" rx="8" class="tile metric"/>
+<text x="898.0" y="372.0" class="tval" text-anchor="middle">+0.045</text>
+<text x="898.0" y="386.0" class="tsub" text-anchor="middle">weight shift</text>
+<text x="684.0" y="418.0" class="body">Interferon-stimulated genes such as</text>
+<text x="684.0" y="434.5" class="body">ISG15 and IFIT3 gain TF weight only</text>
+<text x="684.0" y="451.0" class="body">after stimulation.</text>
+<path class="chev" d="M339,298 l6,6 l-6,6"/>
+<path class="chev" d="M655,298 l6,6 l-6,6"/>
+<rect x="36" y="512" width="928" height="110" rx="12" class="panel"/>
+<text x="52.0" y="538.0" class="eyebrow">WORKFLOW</text>
+<text x="140.0" y="538.0" class="small">PyTorch on CUDA with Scanpy, decoupler, torch.optim.swa_utils and torchbnn</text>
+<line x1="111.7" y1="608" x2="888.3" y2="608" class="track"/>
+<circle cx="111.7" cy="608" r="4.5" class="packet"/>
+<rect x="52.0" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:0.0s"/>
+<text x="61.0" y="565.0" class="step-n">1</text>
+<text x="72.0" y="566.0" class="step-role">Load</text>
+<text x="61.0" y="581.0" class="step-tool">Scanpy</text>
+<text x="61.0" y="594.0" class="small">PBMC h5ad</text>
+<rect x="181.4" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:1.2s"/>
+<text x="190.4" y="565.0" class="step-n">2</text>
+<text x="201.4" y="566.0" class="step-role">Prior</text>
+<text x="190.4" y="581.0" class="step-tool">CollecTRI</text>
+<text x="190.4" y="594.0" class="small">IFN-related TFs</text>
+<rect x="310.9" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:2.4s"/>
+<text x="319.9" y="565.0" class="step-n">3</text>
+<text x="330.9" y="566.0" class="step-role">Mask</text>
+<text x="319.9" y="581.0" class="step-tool">genes × TFs</text>
+<text x="319.9" y="594.0" class="small">sparse decoder</text>
+<rect x="440.3" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:3.6s"/>
+<text x="449.3" y="565.0" class="step-n">4</text>
+<text x="460.3" y="566.0" class="step-role">Encode</text>
+<text x="449.3" y="581.0" class="step-tool">PyTorch</text>
+<text x="449.3" y="594.0" class="small">2 dense layers</text>
+<rect x="569.7" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:4.8s"/>
+<text x="578.7" y="565.0" class="step-n">5</text>
+<text x="589.7" y="566.0" class="step-role">Train</text>
+<text x="578.7" y="581.0" class="step-tool">VEGA</text>
+<text x="578.7" y="594.0" class="small">ctrl and stim</text>
+<rect x="699.1" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:6.0s"/>
+<text x="708.1" y="565.0" class="step-n">6</text>
+<text x="719.1" y="566.0" class="step-role">Uncertainty</text>
+<text x="708.1" y="581.0" class="step-tool">SWA · Bayes</text>
+<text x="708.1" y="594.0" class="small">plus ensembles</text>
+<rect x="828.6" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:7.2s"/>
+<text x="837.6" y="565.0" class="step-n">7</text>
+<text x="848.6" y="566.0" class="step-role">Compare</text>
+<text x="837.6" y="581.0" class="step-tool">weight shift</text>
+<text x="837.6" y="594.0" class="small">ctrl vs stim</text>
+<text x="36.0" y="650.0" class="eyebrow">TAKE-HOME</text>
+<text x="36.0" y="673.0" class="take">Interferon-β <tspan class="em">rewires STAT1, STAT2 and IRF1</tspan> toward interferon-stimulated genes such as CCL8, IFIT2 and</text>
+<text x="36.0" y="694.0" class="take">RSAD2, while ensembles, SWA and Bayesian layers show <tspan class="em">which of these links are certain</tspan>.</text>
+<text x="36.0" y="728.0" class="eyebrow">SKILLS</text>
+<rect x="100.0" y="712" width="70.8" height="24" rx="12" class="skill"/>
+<text x="135.4" y="728.0" class="chiptext" text-anchor="middle">PyTorch</text>
+<rect x="178.8" y="712" width="48.3" height="24" rx="12" class="skill"/>
+<text x="202.9" y="728.0" class="chiptext" text-anchor="middle">VAE</text>
+<rect x="235.1" y="712" width="57.1" height="24" rx="12" class="skill"/>
+<text x="263.6" y="728.0" class="chiptext" text-anchor="middle">VEGA</text>
+<rect x="300.2" y="712" width="96.4" height="24" rx="12" class="skill"/>
+<text x="348.4" y="728.0" class="chiptext" text-anchor="middle">Bayesian NN</text>
+<rect x="404.6" y="712" width="48.3" height="24" rx="12" class="skill"/>
+<text x="428.7" y="728.0" class="chiptext" text-anchor="middle">SWA</text>
+<rect x="460.9" y="712" width="64.3" height="24" rx="12" class="skill"/>
+<text x="493.0" y="728.0" class="chiptext" text-anchor="middle">Scanpy</text>
+<rect x="533.2" y="712" width="76.7" height="24" rx="12" class="skill"/>
+<text x="571.6" y="728.0" class="chiptext" text-anchor="middle">decoupler</text>
+<rect x="617.9" y="712" width="111.1" height="24" rx="12" class="skill"/>
+<text x="673.5" y="728.0" class="chiptext" text-anchor="middle">Gene regulation</text>
+<rect x="737.0" y="712" width="62.0" height="24" rx="12" class="skill"/>
+<text x="768.0" y="728.0" class="chiptext" text-anchor="middle">Python</text>
+</svg>

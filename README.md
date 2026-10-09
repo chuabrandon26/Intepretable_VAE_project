@@ -1,14 +1,56 @@
-# Interpretable_VAE_project for Transcription Factor Rewiring
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/visual-abstract-dark.svg">
+  <img alt="Visual abstract: VEGA variational autoencoders with transcription-factor latent nodes and a CollecTRI-masked decoder are trained separately on IFN-beta stimulated and control PBMCs (16,893 cells). Decoder weights reveal rewiring such as STAT1 to CCL8, STAT2 to IFIT2 and IRF1 to RSAD2, with uncertainty from ensembles, stochastic weight averaging and Bayesian layers." src="assets/visual-abstract-light.svg" width="100%">
+</picture>
 
-Overview:
+<h1 align="center">Interpretable VAE for Transcription Factor Rewiring</h1>
+
+<p align="center">
+  A knowledge-constrained variational autoencoder (VEGA) that measures how interferon-β rewires STAT and IRF regulation in PBMCs, with three ways to quantify uncertainty
+</p>
+
+<p align="center">
+  <img alt="PyTorch: VEGA VAE" src="https://img.shields.io/badge/PyTorch-VEGA%20VAE-EE4C2C?logo=pytorch&logoColor=white">
+  <img alt="prior: CollecTRI · decoupler" src="https://img.shields.io/badge/prior-CollecTRI%20%C2%B7%20decoupler-4a3aa7">
+  <img alt="uncertainty: SWA · Bayesian" src="https://img.shields.io/badge/uncertainty-SWA%20%C2%B7%20Bayesian-1f8f6a">
+  <img alt="Python: Scanpy" src="https://img.shields.io/badge/Python-Scanpy-3776AB?logo=python&logoColor=white">
+  <img alt="license: MIT" src="https://img.shields.io/badge/license-MIT-566573">
+</p>
+
+<p align="center">
+  <a href="#overview">Overview</a> &nbsp;·&nbsp; <a href="#model-architecture">Model</a> &nbsp;·&nbsp; <a href="#uncertainty-estimation-approaches">Uncertainty</a> &nbsp;·&nbsp; <a href="#results">Results</a> &nbsp;·&nbsp; <a href="#the-script">Script</a>
+</p>
+
+---
+
+## At a glance
+
+| **16,893** | **2** | **3** | **+0.104** | **+0.074** |
+|:---:|:---:|:---:|:---:|:---:|
+| PBMCs (train + validation) | conditions, separate models | uncertainty methods | STAT1 → CCL8 weight shift | STAT2 → IFIT2 weight shift |
+
+> **Take-home:** interferon-β rewires STAT1, STAT2 and IRF1 toward interferon-stimulated genes such as CCL8, IFIT2, RSAD2 and CXCL10. In addition, ensembles, stochastic weight averaging and Bayesian layers show which of these links are robust across training runs.
+
+## Skills demonstrated
+
+| Area | Evidence in this repository |
+|---|---|
+| **Deep learning** | A PyTorch VAE with a two-layer encoder, reparameterization trick and a sparse, mask-constrained linear decoder |
+| **Interpretable machine learning** | VEGA latent nodes tied one-to-one to transcription factors, so decoder weights read as regulatory strength |
+| **Uncertainty quantification** | Ensembles of repeated runs, stochastic weight averaging (torch.optim.swa_utils) and Bayesian linear layers (torchbnn) |
+| **Gene regulatory networks** | CollecTRI regulons via decoupler, filtered to interferon-related TFs and split into activator, inhibitor and merged masks |
+| **Single-cell data** | Scanpy and AnnData handling of stimulated and control PBMC training and validation sets |
+
+## Overview
+
 This project implements an interpretable Variational Autoencoder (VAE) to study transcription factor (TF) rewiring in the context of the interferon response. The focus is on interferon-related TFs such as STAT1, STAT2, and IRFs, and how their regulatory influence on target genes differs between stimulated and control conditions.
 
 The model is based on the VEGA (Variational Autoencoder enhanced by Gene Annotations) framework, which incorporates prior biological knowledge directly into the decoder to ensure interpretability of latent variables.
 
-# Data
+## Data
 1) Gene expression data from PBMCs under control and interferon-stimulated conditions
-2) CollecTRI database used to define transcription factor–gene regulatory interactions
-3) TF–gene annotations are encoded as a decoder mask, constraining the model architecture
+2) CollecTRI database used to define transcription factor-gene regulatory interactions
+3) TF-gene annotations are encoded as a decoder mask, constraining the model architecture
 
 ## Model Architecture
 
@@ -32,7 +74,7 @@ The model is based on the VEGA (Variational Autoencoder enhanced by Gene Annotat
   - **Control** condition
   - **Stimulated** condition
 - Models are trained multiple times to account for stochasticity inherent to VAEs
-- Variability in decoder weights across runs is used to estimate uncertainty in TF–gene associations
+- Variability in decoder weights across runs is used to estimate uncertainty in TF-gene associations
 
 ---
 
@@ -43,7 +85,7 @@ Three complementary approaches were explored:
 ### 1. Basic VEGA (Ensemble Training)
 - Train multiple independent VEGA models
 - Compute mean and standard deviation of decoder weights
-- Identify TF–gene interactions with high or low certainty
+- Identify TF-gene interactions with high or low certainty
 
 ### 2. Stochastic Weight Averaging (SWA)
 - Aggregates weights along the SGD trajectory
@@ -61,16 +103,57 @@ Three complementary approaches were explored:
 
 - Models trained using:
   - Activator and inhibitor gene sets
-  - Merged TF–gene regulatory masks
+  - Merged TF-gene regulatory masks
 - Comparisons performed between:
   - Control vs stimulated regulatory programs
   - Deterministic, SWA, and Bayesian formulations
 - Analysis focuses on identifying transcription factors and target genes exhibiting condition-specific regulatory rewiring and uncertainty
 
 ---
+
+## Results
+
+Separate VEGA models were trained on stimulated and control PBMCs, and the decoder weight of each TF to gene link was compared between conditions. The largest shifts all point toward interferon-stimulated genes:
+
+| TF | Target gene | Mask | Control weight | Stimulated weight | Shift |
+|---|---|---|:---:|:---:|:---:|
+| STAT1 | *CCL8* | Standard (all) | 0.0002 | 0.1040 | **+0.104** |
+| STAT2 | *IFIT2* | Standard (all) | 0.0000 | 0.0743 | **+0.074** |
+| IRF1 | *RSAD2* | Merged (activator) | 0.0052 | 0.0671 | **+0.062** |
+| STAT2 | *IFIT3* | Standard (all) | 0.0002 | 0.0558 | **+0.056** |
+| STAT1 | *IDO1* | Standard (all) | 0.0030 | 0.0558 | **+0.053** |
+| IRF1 | *CXCL10* | Standard (all) | 0.0002 | 0.0447 | **+0.045** |
+| STAT1 | *ISG15* | Standard (all) | 0.0018 | 0.0422 | **+0.040** |
+| IRF1 | *CXCL11* | Standard (all) | 0.0011 | 0.0363 | **+0.035** |
+
+Consequently, STAT1, STAT2 and IRF1 behave as activators of the interferon program after IFN-β stimulation, which matches their known roles in JAK-STAT signaling.
+
+![STAT1 regulatory rewiring, top 20 targets in control and stimulated models](assets/figures/stat1-top-target-rewiring.png)
+
+![TF rewiring with standard and merged activator masks for STAT1, STAT2 and IRF1](assets/figures/tf-rewiring-standard-vs-merged.png)
+
+<details>
+<summary><b>Training convergence and ensemble rewiring plots</b></summary>
+
+<br>
+
+<p>
+  <img src="assets/figures/convergence-control.png" width="49%" alt="Training and validation loss, control condition">
+  <img src="assets/figures/convergence-stimulated.png" width="49%" alt="Training and validation loss, stimulated condition">
+</p>
+
+![Ensemble mean weights, control versus stimulated, for six TFs](assets/figures/tf-rewiring-scatter-ensemble.png)
+
+</details>
+
+---
+
 ## The Script
 
 This is the core project logic used in this repository. It covers: loading PBMC data, building an interpretable TF→gene decoder mask from CollecTRI, training VEGA models separately for **stimulated** vs **control**, and exporting TF rewiring weights (mean/std or Bayesian uncertainty) for downstream plotting.
+
+<details>
+<summary><b>Show the full script</b></summary>
 
 ```python
 # ----------------------------
@@ -608,4 +691,12 @@ plottfrewiring(
     tfnames=["STAT1", "STAT2"],
     title="TF Rewiring Control vs Stimulated"
 )
+```
 
+</details>
+
+---
+
+## License
+
+Released under the [MIT License](LICENSE).
